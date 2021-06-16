@@ -47,7 +47,7 @@ cmake version 3.18.4
     
  ##### ./darknet detect xxx.cfg xxx.weight xxx.jpg
     cd yolov4
-    ./darknet detect ../../Neobennia/yolov3_testing.cfg ../../Neobennia/yolov3_training_last.weights ../../Neobennia/Neobennia_2.jpg
+    ./darknet detect ../../Neobennia/yolov3_testing.cfg ../../Neobennia/yolov3_training_last.weights ../../Neobennia/Neobennia_2.jpg > results/Neobennia_2.txt
 ##### Result
     ./../Neobennia/Neobennia_2.jpg: Predicted in 16782.047000 milli-seconds.
         person: 100%
