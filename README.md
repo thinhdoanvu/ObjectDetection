@@ -26,3 +26,5 @@ cmake version 3.18.4
  ##### ./darknet detect xxx.cfg xxx.weight xxx.jpg
     cd yolov4
     ./darknet detect ../../Neobennia/yolov3_testing.cfg ../../Neobennia/yolov3_training_last.weights ../../Neobennia/Neobennia_2.jpg
+##### Result
+![Resul](predictions.jpg)
