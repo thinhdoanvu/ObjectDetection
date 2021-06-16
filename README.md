@@ -30,9 +30,21 @@ cmake version 3.18.4
     cd ../
     mv darknet yolov4
  #### Testing!
- ##### Replacing your class names
+ ##### Replacing your class names (data folder)
     nano yolo4/data/coco.names
     Replace 80 names default by your classes name. (Clear all and replace by neoben)
+ ##### Replacing 80 class name by 1 to fit your input class (cfg folder)
+    nano yolo4/cfg/coco.data
+    change 80 by 1
+        classes= 1
+        train  = /home/pjreddie/data/coco/trainvalno5k.txt
+        valid  = coco_testdev
+        #valid = data/coco_val_5k.list
+        names = data/coco.names
+        backup = /home/pjreddie/backup/
+        eval=coco
+
+    
  ##### ./darknet detect xxx.cfg xxx.weight xxx.jpg
     cd yolov4
     ./darknet detect ../../Neobennia/yolov3_testing.cfg ../../Neobennia/yolov3_training_last.weights ../../Neobennia/Neobennia_2.jpg
