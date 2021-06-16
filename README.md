@@ -1,4 +1,11 @@
 # ObjectDetection
+## Install LabelImg
+    git clone https://github.com/tzutalin/labelImg.git
+    cd labelImg
+    sudo apt-get install pyqt5-dev-tools
+    sudo apt-get -y install python3-pip
+    sudo pip3 install -r requirements/requirements-linux-python3.txt
+    make qt5py3
 
 ## How to install Yolo4
 ### cmake
@@ -23,6 +30,9 @@ cmake version 3.18.4
     cd ../
     mv darknet yolov4
  #### Testing!
+ ##### Replacing your class names
+    nano yolo4/data/coco.names
+    Replace 80 names default by your classes name. (Clear all and replace by neoben)
  ##### ./darknet detect xxx.cfg xxx.weight xxx.jpg
     cd yolov4
     ./darknet detect ../../Neobennia/yolov3_testing.cfg ../../Neobennia/yolov3_training_last.weights ../../Neobennia/Neobennia_2.jpg
