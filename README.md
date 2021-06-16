@@ -27,4 +27,41 @@ cmake version 3.18.4
     cd yolov4
     ./darknet detect ../../Neobennia/yolov3_testing.cfg ../../Neobennia/yolov3_training_last.weights ../../Neobennia/Neobennia_2.jpg
 ##### Result
+./../Neobennia/Neobennia_2.jpg: Predicted in 16782.047000 milli-seconds.
+person: 100%
+person: 100%
+person: 99%
+person: 100%
+person: 95%
+person: 99%
+person: 98%
+person: 99%
+person: 99%
+person: 100%
+person: 100%
+person: 100%
+
 ![Resul](predictions.jpg)
+
+# CAUTION!
+I trained model by google colab using yolov3 and I had 2 files: yolov3_testing.cfg and yolov3_training_last.weights.
+HOWEVER, IF I USE YOLOV3 TO DETECTING, I WILL ONLY HAVE RESULT BY TEXT (NOT IMAGE LIKE V4)
+
+    cd yolov3
+    ./darknet detect ../../Neobennia/yolov3_testing.cfg ../../Neobennia/yolov3_training_last.weights ../../Neobennia/Neobennia_2.jpg
+   
+        person: 100%
+        person: 100%
+        person: 99%
+        person: 100%
+        person: 95%
+        person: 99%
+        person: 98%
+        person: 99%
+        person: 99%
+        person: 100%
+        person: 100%
+        person: 100%
+        
+ # IMPORTANT
+ ## YOU MUST DOWNLOAD *.cfg *.last.weight FROM YOUR GOOGLE DRIVE AFTER TRAINING MODEL FROM GOOGLE COLAB
