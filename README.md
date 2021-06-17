@@ -4,7 +4,9 @@
     cd labelImg
     sudo apt-get install pyqt5-dev-tools
     sudo apt-get -y install python3-pip
-    sudo pip3 install -r requirements/requirements-linux-python3.txt
+    sudo pip3 install -r requirements/requirements-linux-python3.txt 
+    #Err lxml==4.6.3
+    sudo pip3 install lxml
     make qt5py3
 
 ## How to install Yolo4
