@@ -1,1 +1,12 @@
+Object detection: tìm vị trí của đối tượng có trong ảnh/video đôi khi ngữ còn sử dụng để tìm ngữ nghĩa của một lớp nhất định trong hình ảnh/video.
+YOLOv4: mô hình mạng CNN cho việc phát hiện, nhận dạng, phân loại đối tượng được tạo ra từ việc kết hợp giữa các convolutional layers và connected layers.
+Trong đóp các convolutional layers sẽ trích xuất ra các feature của ảnh, còn full-connected layers sẽ dự đoán ra xác suất đó và tọa độ của đối tượng.
+Google Colab: một dịch vụ miễn phí của Google (GPU, TPU) nhằm hỗ trợ nghiên cứu và học tập về AI. GC cung cấp môi trường Code như Jupyter Notebook.
 
+Bước 1: Truy cập https://colab.research.google.com/
+  Sign In: Sử dụng Email của Google
+  
+Bước 2: New - Notebook
+  Liên kết với Google drive
+  
+Bước 3: 
