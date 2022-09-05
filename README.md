@@ -12,7 +12,7 @@
  ### Running LabelImg
     https://github.com/thinhdoanvu/ObjectDetection/blob/main/LabelImg
  ### Result
-    ![LabelImg](LabelImg.png)
+ ![LabelImg](LabelImg.png)
 
 ## Google Colab
 
