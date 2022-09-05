@@ -1,5 +1,6 @@
 # ObjectDetection
-## Install LabelImg
+## LabelImg
+### Install LabelImg
     git clone https://github.com/tzutalin/labelImg.git
     cd labelImg
     sudo apt-get install pyqt5-dev-tools
@@ -8,7 +9,12 @@
     #Err lxml==4.6.3
     sudo pip3 install lxml
     make qt5py3
-![LabelImg](LabelImg.png)
+ ### Running LabelImg
+    https://github.com/thinhdoanvu/ObjectDetection/blob/main/LabelImg
+ ### Result
+    ![LabelImg](LabelImg.png)
+
+## Google Colab
 
 ## How to install Yolo4
 ### cmake
@@ -17,8 +23,7 @@
 cmake version 3.18.4
 ### opencv
     sudo apt install libopencv-dev python3-opencv
-    opencv_version
-4.5.1
+    opencv_version 4.5.1
 ### openmp
     sudo apt install libomp-dev git g++
 ### YOLO4
