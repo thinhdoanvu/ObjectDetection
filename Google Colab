@@ -103,4 +103,8 @@ Bước 7: Tạo các file cấu hình cho model
     names = yolo.names
     backup = backup
   Kết quả: Xem ảnh Google Colab_names_data_inside.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%Colab_names_data_inside.png)
+
+Bước 8: Bật GPU và cấu hình GPU
+  Click Run time - Change run time type - Click GPU
+  Kết quả: Xem ảnh Google Colab_SetGPU.png
   
