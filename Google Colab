@@ -106,5 +106,12 @@ Bước 7: Tạo các file cấu hình cho model
 
 Bước 8: Bật GPU và cấu hình GPU
   Click Run time - Change run time type - Click GPU
-  Kết quả: Xem ảnh Google Colab_SetGPU.png
+  Kết quả: Xem ảnh Google Colab_SetGPU.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_SetGPU.png)
   
+  Truy cập darknet/makefile. Mở file makefile và sửa 4 dòng đầu tiên (sửa số 0 thành số 1):
+  (Nếu không sửa online được thì tải về - Edit - Upload lên lại)
+    GPU=1
+    CUDNN=1
+    CUDNN_HALF=1
+    OPENCV=1
+  Kết quả: Xem ảnh Google Colab_Makefile_Edit.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_Makefile_Edit.png)
