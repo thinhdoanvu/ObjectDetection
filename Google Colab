@@ -9,6 +9,12 @@ Bước 1: Truy cập https://colab.research.google.com/
   Sign In: Sử dụng Email của Google
   
 Bước 2: New - Notebook
-  Liên kết với Google drive
+  Liên kết với Google drive (Xem ảnh Google Colab_ImportDrive.png và Google Colab_ImportDrive_Accept.png)
+  Xác nhận quyền truy cập đến Google Drive.
+  Kết quả: Mounted at /content/gdrive
   
-Bước 3: 
+Bước 3: Cập nhật các Package: Clik +Code
+  !apt-get update
+  !apt-get upgrade
+  Click PLAY again
+  Kết quả: Xem ảnh Google Colab_Update.png
