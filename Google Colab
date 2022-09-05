@@ -149,3 +149,26 @@ Bước 11: Train model
     4. Sửa file cfg (tổng cộng sửa 10 dòng nhé)
     5. Make darknet
     6.Tải pretrain
+  %cd /content/gdrive/My\ Drive/darknet
+  !./darknet detector train yolo.data cfg/yolov4-custom.cfg yolov4.conv.137 -dont_show -map
+  ******************************************************************************** 
+  GIẢI THÍCH:
+  “!./darknet detector train” là truy cập vào thư mục darknet và thực hiện lệnh train
+  yolo.data, cfg/yolov4-custom.cfg là các file ta đã tạo và sửa ở trên
+  yolov4.conv.137 là file ta đã tải ở bước 4.11
+  -dont_show để tạo ra biểu đồ của loss function phục vụ quá trình giám sát và đánh giá mô hình
+  -map tạo ra biểu đồ mAP.
+   ******************************************************************************** 
+                                STOP TRAINNING
+   ******************************************************************************** 
+   Trong quá trình train, output được xuất liên tục. Chúng ta chỉ cần quan tâm tới một số vấn đề :1: 3619.999512, 3619.999512 avg loss​ :
+        “1″ chính là số vòng train.
+        3619.999512 avg loss​: chính là loss.
+        
+Nếu tab không hoạt động thì Google Colab sẽ tự ngắt kết nối, nên các bạn tải autoclick về và xóa output liên tục nhé.
+
+Khi nào có thể dừng quá trình train:
+
+–  Các bạn có thể thấy như hình ở dưới, khi giá trị loss và mAP đạt được một giá trị nhất định và có vẻ không thể tăng thêm nữa. Thì đó là thời điểm chúng ta có thể dừng. ( quá trình train thường kéo dài >4000 vòng)
+
+– Theo tác giả thì thời điểm có thể dừng quá trình train: là khi loss trung bình có giá trị 0.05 tới 1 đối với các mô hình nhỏ, các nhãn có đặc điểm khác xa hoàn toàn nhau. và loss trung bình có giá trị trong khoảng 1 tới 3 đối với mô hình lớn, nhiều nhãn và các nhãn có đặc điểm tương đồng (khó nhận dạng hơn).
