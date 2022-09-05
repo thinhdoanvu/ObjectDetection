@@ -20,3 +20,23 @@ Bước 6: Tiến hành gán nhãn, có thể sử dụng một số phím tắt
   Del: Delete rectangle
   Ctrl ++: Zoom in
   Ctrl +-: Zoom out
+
+Với mỗi hình gán nhãn xong, một tập tin .txt có tên trùng với ảnh có nội dung như sau:
+  0 0.342634 0.261653 0.090960 0.075382
+  0 0.450195 0.367626 0.080636 0.095776
+  0 0.566406 0.304807 0.083705 0.083758
+  0 0.673968 0.360706 0.061105 0.103787
+  ...
+  0 0.634626 0.902221 0.067243 0.097232
+  0 0.700753 0.965950 0.052734 0.068099
+  0 0.603097 0.976693 0.059989 0.046613
+  
+Trong đó, cột dầu tiên tương ứng với class ở tập tin có tên là classes.txt
+
+  <class> là một số tự nhiên đánh số thứ tự của nhãn(classes) bắt đầu là 0, 1, 2,... tương ứng với số lớp cần gán nhãn
+  <x> <y> <chiều rộng> <chiều cao> là tọa độ của nhãn được xác định bởi:
+    <x> = <tọa độ trung tâm của vật thể theo phương x> / <chiều rộng của hình>
+    <y> = <tọa độ trung tâm của vật thể theo phương x> / <chiều cao của hình>
+    <chiều rộng> = <chiều rộng thực của khung> / <chiều rông của hình>
+    <chiều cao> = <chiều cao thực của khung> / <chiều cao của hình>
+@@@@@@@@@@@@@@@@@@@@@@@@@@ HẾT @@@@@@@@@@@@@@@@@@@
