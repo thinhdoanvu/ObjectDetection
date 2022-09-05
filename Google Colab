@@ -42,3 +42,7 @@ Bước 5: Nén toàn bộ tập tin ảnh và txt thành data.zip và tải lê
   Kết quả: Google Colab_UploadData_ZIP.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_UploadData_ZIP.png)
   
 Bước 6: Giải nén data.zip
+  %cd /content/gdrive/MyDrive/darknet/
+  !unzip data.zip
+  !mv hongcau data
+  Kết quả: Xem ảnh Google Colab_Unzip_Inside.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_Unzip_Inside.png)
