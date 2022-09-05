@@ -8,7 +8,7 @@
     #Err lxml==4.6.3
     sudo pip3 install lxml
     make qt5py3
-![Result](labelImg.png)
+![LabelImg](LabelImg.png)
 
 ## How to install Yolo4
 ### cmake
