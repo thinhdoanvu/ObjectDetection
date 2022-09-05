@@ -108,10 +108,26 @@ Bước 8: Bật GPU và cấu hình GPU
   Click Run time - Change run time type - Click GPU
   Kết quả: Xem ảnh Google Colab_SetGPU.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_SetGPU.png)
   
+******************************************************************************** 
   Truy cập darknet/makefile. Mở file makefile và sửa 4 dòng đầu tiên (sửa số 0 thành số 1):
-  (Nếu không sửa online được thì tải về - Edit - Upload lên lại)
-    GPU=1
-    CUDNN=1
-    CUDNN_HALF=1
-    OPENCV=1
-  Kết quả: Xem ảnh Google Colab_Makefile_Edit.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_Makefile_Edit.png)
+    (Nếu không sửa online được thì tải về - Edit - Upload lên lại)
+      GPU=1
+      CUDNN=1
+      CUDNN_HALF=1
+      OPENCV=1
+    Kết quả: Xem ảnh Google Colab_Makefile_Edit.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_Makefile_Edit.png)
+
+******************************************************************************** 
+  Cấu hình cho model YOLOv4. Truy câp darknet/cfg - Mở yolo4-custom.cfg và chỉnh sửa các dòng: (tải về Edit - Sau đó Upload)
+    Dòng 3: Batch = 64
+    Dòng 4: subdivisions=16
+    Dòng 20: max_batches = số nhãn*2000 ( ví dụ mình có 3 nhãn, thì sẽ sửa thành 6000. Hoặc có thể lớn hơn, tùy ý thích)
+    Dòng 22: step = 80%(của max_batches), 90% (của max_batches). ví dụ max_batches của mình là 6000, step sẽ sửa thành: step = 4800,5400
+    
+    Sửa classes trong mục [yolo] = số nhãn(classes của bạn), sửa filters = (số nhãn +5)*3 trong mục [Convolution] nằm trước mục [yolo]. 
+      Model của mình sẽ sửa thành classes = 1 
+      Model của mình có số nhãn là 1 thì để filters =18, số nhãn bằng 2 thì để filters = 21
+      UPLOAD file cfg trở lại darknet
+   
+******************************************************************************** 
+   
