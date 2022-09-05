@@ -18,3 +18,12 @@ Bước 3: Cập nhật các Package: Clik +Code
   !apt-get upgrade
   Click PLAY again
   Kết quả: Xem ảnh Google Colab_Update.png
+
+Bước 4: Tải model về drive (Chú ý là phải có các ký tự ! và %)
+  Clik +CODE
+  !rm -rf darknet #Xóa thư mục darknet nếu có 
+  %cd /content/gdrive/My\ Drive # truy cập vào Drive
+  !git clone https://github.com/AlexeyAB/darknet #Tải model về Drive
+  !rm -rf data #Xóa thư mục data trong thư mục darknet 
+  !mkdir backup # tạo thư mục backup để lưu các file trọng số sau training
+  Kết quả: Xem ảnh (Google Colab_DownloadModel.png, Google Colab_darknet.png và Google Colab_darknet_inside.png)
