@@ -1,0 +1,22 @@
+Bước 1: OPEN DIR để chọn thư mục chứa ảnh
+
+Bước 2: CHANGE SAVE DIR để chọn thư mục lưu file txt/xml
+
+Bước 3: Pascal/VOC -> YOLO chuyển đổi file lưu từ xml sang txt (Yolo)
+
+Bước 4: View/auto save mode để tự lưu các file.
+
+Bước 5: View/single class mode để gán nhãn cho từng loại đối tượng
+
+Bước 6: Tiến hành gán nhãn, có thể sử dụng một số phím tắt như sau:
+
+  Ctrl + U: Load ảnh từ cùng 1 thư mục
+  Ctrl + R: Change thư mục lưu trữ kết quả của file .xml hoặc .txt
+  Ctrl + S: Save
+  Ctr + Shift + D: Delete ảnh hiện tại
+  W: Create khung nhãn
+  A: Previous
+  D: Next
+  Del: Delete rectangle
+  Ctrl ++: Zoom in
+  Ctrl +-: Zoom out
