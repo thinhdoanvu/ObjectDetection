@@ -130,4 +130,14 @@ Bước 8: Bật GPU và cấu hình GPU
       UPLOAD file cfg trở lại darknet
    
 ******************************************************************************** 
-   
+Bước 9. Tải pretrain
+  %cd /content/gdrive/My\ Drive/darknet
+  !wget https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.conv.137
+  (LƯU Ý: Sau 6 phút Google Colab tự động đăng xuất nên nếu BÁO LỖI không tìm thấy thư mục gdrive/... thì connect lại từ bước 1 -  Import)
+
+Bước 10: Make darknet
+  %cd /content/gdrive/My\ Drive/darknet
+  !make clean
+  !make
+  !chmod +x ./darknet
+
