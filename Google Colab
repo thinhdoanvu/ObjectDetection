@@ -82,14 +82,25 @@ with open("/content/gdrive/My Drive/darknet/train.txt", "w") as f:
     if (os.path.exists(files[idx][:-3] + "txt")):
       f.write(files[idx]+'\n')
 
-# Tạo file vali.txt
+# Tạo file val.txt
 with open("/content/gdrive/My Drive/darknet/val.txt", "w") as f:
   for idx in np.arange(len(files)):
     if (idx in rand_idx) and (os.path.exists(files[idx][:-3] + "txt")):
       f.write(files[idx]+'\n')
-  print('done2')
+ print('done2')
   
 ********************************************************************************  
   Kết quả:
     Xem ảnh Google Colab_train.txt_Inside.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_train.txt_Inside.png)
     Xem ảnh: Google Colab_val.txt_Inside.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_val.txt_Inside.png)
+
+Bước 7: Tạo các file cấu hình cho model
+  Bước 7.1. Đổi tên classes.txt thành tên yolo.names (file class khi dùng LabelImg)
+  Bước 7.2. Tạo file yolo.data có định dạng như sau (backup = thư mục backup)
+    classes = 1
+    train = train.txt
+    valid = val.txt
+    names = yolo.names
+    backup = backup
+  Kết quả: Xem ảnh Google Colab_names_data_inside.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%Colab_names_data_inside.png)
+  
