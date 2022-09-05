@@ -15,7 +15,8 @@
  ![LabelImg](LabelImg.png)
 
 ## Google Colab
-
+    https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab
+    
 ## How to install Yolo4
 ### cmake
     sudo apt install cmake
