@@ -8,6 +8,7 @@
     #Err lxml==4.6.3
     sudo pip3 install lxml
     make qt5py3
+![Result](labelImg.png)
 
 ## How to install Yolo4
 ### cmake
@@ -65,7 +66,7 @@ cmake version 3.18.4
         person: 100%
         person: 100%
 
-![Resul](predictions.jpg)
+![Result](predictions.jpg)
 
 # CAUTION!
 I trained model by google colab using yolov3 and I had 2 files: yolov3_testing.cfg and yolov3_training_last.weights.
