@@ -141,3 +141,11 @@ Bước 10: Make darknet
   !make
   !chmod +x ./darknet
 
+Bước 11: Train model
+   kiểm tra lại các bước xem đầy đủ chưa nhé!
+    1. Tạo file train.txt, val.txt
+    2.Tạo file yolo.names, yolo.data
+    3. Sửa makefile và bật GPU
+    4. Sửa file cfg (tổng cộng sửa 10 dòng nhé)
+    5. Make darknet
+    6.Tải pretrain
