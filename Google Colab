@@ -27,3 +27,13 @@ Bước 4: Tải model về drive (Chú ý là phải có các ký tự ! và %)
   !rm -rf data #Xóa thư mục data trong thư mục darknet 
   !mkdir backup # tạo thư mục backup để lưu các file trọng số sau training
   Kết quả: Xem ảnh (Google Colab_DownloadModel.png, Google Colab_darknet.png và Google Colab_darknet_inside.png)
+
+Bước 5: Nén toàn bộ tập tin ảnh và txt thành data.zip và tải lên Drive, bỏ trong thư mục darknet
+  (LƯU Ý:) 
+    Bỏ file classes.txt RA KHỎI THƯ MỤC trước khi ZIP
+    Vì ở đây chỉ có 1 class nên cột dầu tiên của tất cả các file .txt là 0
+    Thông thường khi gán nhãn không để ý có thể là 15, 16 hoặc số khác.
+    CẦN HIỆU CHỈNH TRƯỚC KHI ZIP
+  Kết quả: Upload Data_ZIP.png
+  
+Bước 6: Giải nén data.zip
