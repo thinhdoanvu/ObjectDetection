@@ -46,3 +46,50 @@ Bước 6: Giải nén data.zip
   !unzip data.zip
   !mv hongcau data
   Kết quả: Xem ảnh Google Colab_Unzip_Inside.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_Unzip_Inside.png)
+
+Bước 7: Tạo các file cho trainning (tham khảo miai.vn)
+  train.txt (chứa địa chỉ của các file ảnh đưa vào quá trình train model) 
+  val.txt (chứa địa chỉ của các file ảnh đưa vào quá trình test và đánh giá model)
+  ********************************************************************************
+  CHÚ Ý KHOẢNG CÁCH CÁC DẤU CÁCH: VÌ ĐÂY LÀ CODE PYTHON
+  ********************************************************************************
+%cd /content/gdrive/My Drive/darknet/
+
+#import các thư viện
+import glob2
+import math  
+import os
+import numpy as np
+
+#LOAD FILE ẢNH
+files = []
+for ext in ["*.png", "*.jpeg", "*.jpg"]:
+  image_files = glob2.glob(os.path.join("data/", ext))
+  #tìm kiếm các file có đuôi dạng: png, jpeg, jpg trong thư mục data
+  print(image_files)
+  files += image_files
+  #lưu tất cả các file vào biến files
+  print(len(files))
+
+nb_val = math.floor(len(files)*0.2)
+#Biến nb_val được gán bằng 0.2 độ dài của biến files(chứa tất cả các tên anh)
+rand_idx = np.random.randint(0, len(files), nb_val)
+#Chọn ngẫu nhiên các ảnh trong biến files
+
+# Tạo file train.txt
+with open("/content/gdrive/My Drive/darknet/train.txt", "w") as f:
+  for idx in np.arange(len(files)):
+    if (os.path.exists(files[idx][:-3] + "txt")):
+      f.write(files[idx]+'\n')
+
+# Tạo file vali.txt
+with open("/content/gdrive/My Drive/darknet/val.txt", "w") as f:
+  for idx in np.arange(len(files)):
+    if (idx in rand_idx) and (os.path.exists(files[idx][:-3] + "txt")):
+      f.write(files[idx]+'\n')
+  print('done2')
+  
+********************************************************************************  
+  Kết quả:
+    Xem ảnh Google Colab_train.txt_Inside.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_train.txt_Inside.png)
+    Xem ảnh: Google Colab_val.txt_Inside.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_val.txt_Inside.png)
