@@ -9,7 +9,9 @@ Bước 1: Truy cập https://colab.research.google.com/
   Sign In: Sử dụng Email của Google
   
 Bước 2: New - Notebook
-  Liên kết với Google drive (Xem ảnh Google Colab_ImportDrive.png và Google Colab_ImportDrive_Accept.png)
+  Liên kết với Google drive 
+    Xem ảnh Google Colab_ImportDrive.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_ImportDrive.png) 
+    Xem ảnh Google Colab_ImportDrive_Accept.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_ImportDrive_Accept.png)
   Xác nhận quyền truy cập đến Google Drive.
   Kết quả: Mounted at /content/gdrive
   
@@ -17,7 +19,7 @@ Bước 3: Cập nhật các Package: Clik +Code
   !apt-get update
   !apt-get upgrade
   Click PLAY again
-  Kết quả: Xem ảnh Google Colab_Update.png
+  Kết quả: Xem ảnh Google Colab_Update.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_Update.png)
 
 Bước 4: Tải model về drive (Chú ý là phải có các ký tự ! và %)
   Clik +CODE
@@ -26,7 +28,10 @@ Bước 4: Tải model về drive (Chú ý là phải có các ký tự ! và %)
   !git clone https://github.com/AlexeyAB/darknet #Tải model về Drive
   !rm -rf data #Xóa thư mục data trong thư mục darknet 
   !mkdir backup # tạo thư mục backup để lưu các file trọng số sau training
-  Kết quả: Xem ảnh (Google Colab_DownloadModel.png, Google Colab_darknet.png và Google Colab_darknet_inside.png)
+  Kết quả: 
+    Xem ảnh Google Colab_DownloadModel.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_DownloadModel.png)
+    Xem ảnh Google Colab_darknet.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_darknet.png)
+    Xem ảnh Google Colab_darknet_inside.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_darknet_inside.png)
 
 Bước 5: Nén toàn bộ tập tin ảnh và txt thành data.zip và tải lên Drive, bỏ trong thư mục darknet
   (LƯU Ý:) 
@@ -34,6 +39,6 @@ Bước 5: Nén toàn bộ tập tin ảnh và txt thành data.zip và tải lê
     Vì ở đây chỉ có 1 class nên cột dầu tiên của tất cả các file .txt là 0
     Thông thường khi gán nhãn không để ý có thể là 15, 16 hoặc số khác.
     CẦN HIỆU CHỈNH TRƯỚC KHI ZIP
-  Kết quả: Upload Data_ZIP.png
+  Kết quả: Google Colab_UploadData_ZIP.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_UploadData_ZIP.png)
   
 Bước 6: Giải nén data.zip
