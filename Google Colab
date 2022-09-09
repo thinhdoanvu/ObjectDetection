@@ -200,3 +200,16 @@ Mở file yolo_object_detection.py và sửa:
   
   Thực hiện:
   python3 yolo_object_detection.py
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+KÉT QUẢ LÀ CHƯƠNG TRÌNH CHẠY KHÁ NGU: NHẬN DẠNG ĐƯỢC RẤT ÍT. 
+DO ĐÓ, SỬ DỤNG YOLO4 SẼ TỐT HƠN RẤT NHIỀU
+VẪN DÙNG FILE CONFIG CỦA YOLO3 (NHƯ TRONG GITHUB VÀ KHÔNG CẦN THAY THẾ CÁC CHỈ SỐ NHƯ COLAB
+(VÌ NÓ LÀM RỒI)
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+1. Sửa file coco.names (trong thư mục yolo4/data)
+Dòng 1: hc
+
+2. darknet detect yolov3_testing.cfg yolov3_training_last.weights *jpg > res.txt
+./darknet detect ../train_yolo_to_detect_custom_object_2022Sep/yolo_custom_detection/yolov3_testing.cfg ../train_yolo_to_detect_custom_object_2022Sep/yolo_custom_detection/yolov3_training_last.weights ../../DanQuynh/Thunghiem/2022-08-16-c4-D32-GS1M-25M-0026.jpg > ../../DanQuynh/Thunghiem/res.txt
+
+Kết quả hình ảnh được lưu trong thư mục yolo4 với tên file là: predictions.jpg
