@@ -1,14 +1,27 @@
 Object detection: tìm vị trí của đối tượng có trong ảnh/video đôi khi ngữ còn sử dụng để tìm ngữ nghĩa của một lớp nhất định trong hình ảnh/video.
 
-YOLOv4: mô hình mạng CNN cho việc phát hiện, nhận dạng, phân loại đối tượng được tạo ra từ việc kết hợp giữa các convolutional layers và connected layers.
+YOLOvx: mô hình mạng CNN cho việc phát hiện, nhận dạng, phân loại đối tượng được tạo ra từ việc kết hợp giữa các convolutional layers và connected layers.
 Trong đóp các convolutional layers sẽ trích xuất ra các feature của ảnh, còn full-connected layers sẽ dự đoán ra xác suất đó và tọa độ của đối tượng.
 
 Google Colab: một dịch vụ miễn phí của Google (GPU, TPU) nhằm hỗ trợ nghiên cứu và học tập về AI. GC cung cấp môi trường Code như Jupyter Notebook.
 
-Bước 1: Truy cập https://colab.research.google.com/
+Bước 1: Đăng nhập google drive và log in.
+        Tạo mới folder “yolov3”.
+        Nén toàn bộ tập tin ảnh và txt thành data.zip và tải lên Drive, bỏ trong thư mục darknet
+        (LƯU Ý:) 
+          Bỏ file classes.txt RA KHỎI THƯ MỤC trước khi ZIP
+          Vì ở đây chỉ có 1 class nên cột dầu tiên của tất cả các file .txt là 0
+          Thông thường khi gán nhãn không để ý có thể là 15, 16 hoặc số khác.
+          CẦN HIỆU CHỈNH TRƯỚC KHI ZIP
+        Kết quả: Google Colab_UploadData_ZIP.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_UploadData_ZIP.png)
+
+Bước 2: Truy cập https://colab.research.google.com/
   Sign In: Sử dụng Email của Google
   
-Bước 2: New - Notebook
+Bước 3: File - Upload Notebook - Train_YoloV3.ipynb
+  Tập tin trong folder train_yolo_to_detect_custom_object đã được tải ở pysource.com hoặc từ github ở respository này.
+  Xem ảnh Google colab_UploadTrainning_notebook.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20colab_UploadTrainning_notebook.png)
+  
   Liên kết với Google drive 
     Xem ảnh Google Colab_ImportDrive.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_ImportDrive.png) 
     Xem ảnh Google Colab_ImportDrive_Accept.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_ImportDrive_Accept.png)
@@ -32,14 +45,6 @@ Bước 4: Tải model về drive (Chú ý là phải có các ký tự ! và %)
     Xem ảnh Google Colab_DownloadModel.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_DownloadModel.png)
     Xem ảnh Google Colab_darknet.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_darknet.png)
     Xem ảnh Google Colab_darknet_inside.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_darknet_inside.png)
-
-Bước 5: Nén toàn bộ tập tin ảnh và txt thành data.zip và tải lên Drive, bỏ trong thư mục darknet
-  (LƯU Ý:) 
-    Bỏ file classes.txt RA KHỎI THƯ MỤC trước khi ZIP
-    Vì ở đây chỉ có 1 class nên cột dầu tiên của tất cả các file .txt là 0
-    Thông thường khi gán nhãn không để ý có thể là 15, 16 hoặc số khác.
-    CẦN HIỆU CHỈNH TRƯỚC KHI ZIP
-  Kết quả: Google Colab_UploadData_ZIP.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_UploadData_ZIP.png)
   
 Bước 6: Giải nén data.zip
   %cd /content/gdrive/MyDrive/darknet/
