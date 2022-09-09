@@ -179,15 +179,24 @@ Bước 15: Pretrain
   auto_refresh_page.sh
  ******************************************************************************** 
                                 STOP TRAINNING
-   ******************************************************************************** 
+ ******************************************************************************** 
    Trong quá trình train, output được xuất liên tục. Chúng ta chỉ cần quan tâm tới một số vấn đề :1: 3619.999512, 3619.999512 avg loss​ :
         “1″ chính là số vòng train.
         3619.999512 avg loss​: chính là loss.
-        
-Nếu tab không hoạt động thì Google Colab sẽ tự ngắt kết nối, nên các bạn tải autoclick về và xóa output liên tục nhé.
+******************************************************************************** 
+Bước 16: Test the model 
+Download file yolov3_training_last.weights trong yolov3_Sep2022 (GD) và đặt cùng folder với yolo_object_detection.py and yolov3_testing.cfg.
+Ngoài ra, file test.log và test_new.log thể hiện kết quả thực thi (GD/yolov3_Sep2022/scripts/log_parser/
 
-Khi nào có thể dừng quá trình train:
-
-–  Các bạn có thể thấy như hình ở dưới, khi giá trị loss và mAP đạt được một giá trị nhất định và có vẻ không thể tăng thêm nữa. Thì đó là thời điểm chúng ta có thể dừng. ( quá trình train thường kéo dài >4000 vòng)
-
-– Theo tác giả thì thời điểm có thể dừng quá trình train: là khi loss trung bình có giá trị 0.05 tới 1 đối với các mô hình nhỏ, các nhãn có đặc điểm khác xa hoàn toàn nhau. và loss trung bình có giá trị trong khoảng 1 tới 3 đối với mô hình lớn, nhiều nhãn và các nhãn có đặc điểm tương đồng (khó nhận dạng hơn).
+Mở file yolo_object_detection.py và sửa:
+  Dòng 11 "Koala" thành hongcau (tên class mình đặt ban đầu)
+    # Name custom object
+    classes = ["Koala"]
+  Dòng 14: thư mục chứa hình ảnh
+  # Images path
+  images_path = glob.glob(r"D:\Pysource\Youtube205) Train Yolo google cloud\dataset\*.jpg")
+  thành
+  images_path = glob.glob(r"/home/dthinh/DanQuynh/Thunghiem/*.jpg")
+  
+  Thực hiện:
+  python3 yolo_object_detection.py
