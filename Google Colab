@@ -121,94 +121,57 @@ Bước 12: Extract Images
   
 ********************************************************************************
   CHUẨN BỊ TRAINNING
+  # We're going to convert the class index on the .txt files. As we're working with only one class, it's supposed to be class 0.
+  # If the index is different from 0 then we're going to change it.
 ********************************************************************************
-#import các thư viện
-import glob2
-import math  
+Bước 13: import các thư viện
+import glob
 import os
-import numpy as np
+import re
 
-#LOAD FILE ẢNH
-files = []
-for ext in ["*.png", "*.jpeg", "*.jpg"]:
-  image_files = glob2.glob(os.path.join("data/", ext))
-  #tìm kiếm các file có đuôi dạng: png, jpeg, jpg trong thư mục data
-  print(image_files)
-  files += image_files
-  #lưu tất cả các file vào biến files
-  print(len(files))
+txt_file_paths = glob.glob(r"data/obj/*.txt")
+for i, file_path in enumerate(txt_file_paths):
+    # get image size
+    with open(file_path, "r") as f_o:
+        lines = f_o.readlines()
 
-nb_val = math.floor(len(files)*0.2)
-#Biến nb_val được gán bằng 0.2 độ dài của biến files(chứa tất cả các tên anh)
-rand_idx = np.random.randint(0, len(files), nb_val)
-#Chọn ngẫu nhiên các ảnh trong biến files
+        text_converted = []
+        for line in lines:
+            print(line)
+            numbers = re.findall("[0-9.]+", line)
+            print(numbers)
+            if numbers:
 
-# Tạo file train.txt
-with open("/content/gdrive/My Drive/darknet/train.txt", "w") as f:
-  for idx in np.arange(len(files)):
-    if (os.path.exists(files[idx][:-3] + "txt")):
-      f.write(files[idx]+'\n')
-
-# Tạo file val.txt
-with open("/content/gdrive/My Drive/darknet/val.txt", "w") as f:
-  for idx in np.arange(len(files)):
-    if (idx in rand_idx) and (os.path.exists(files[idx][:-3] + "txt")):
-      f.write(files[idx]+'\n')
- print('done2')
-  
+                # Define coordinates
+                text = "{} {} {} {} {}".format(0, numbers[1], numbers[2], numbers[3], numbers[4])
+                text_converted.append(text)
+                print(i, file_path)
+                print(text)
+        # Write file
+        with open(file_path, 'w') as fp:
+            for item in text_converted:
+                fp.writelines("%s\n" % item)
 ********************************************************************************  
-  Kết quả:
-    Xem ảnh Google Colab_train.txt_Inside.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_train.txt_Inside.png)
-    Xem ảnh: Google Colab_val.txt_Inside.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_val.txt_Inside.png)
-
-Bước 7: Tạo các file cấu hình cho model
-  Bước 7.1. Đổi tên classes.txt thành tên yolo.names (file class khi dùng LabelImg)
-  Bước 7.2. Tạo file yolo.data có định dạng như sau (backup = thư mục backup)
-    classes = 1
-    train = train.txt
-    valid = val.txt
-    names = yolo.names
-    backup = backup
-  Kết quả: Xem ảnh Google Colab_names_data_inside.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%Colab_names_data_inside.png)
+CHÚ Ý: Khi gán nhãn, có thể máy tính Windows sẽ auto bỏ các thành phần số 0 ở cuối dẫn đến
+Chiều dài của các cột không thống nhất. Nên sử dụng công thức Excel để gán lại cho bằng 8
+********************************************************************************  
+Bước 14: Tạo List images
+  import glob
+  images_list = glob.glob("data/obj/*.jpg")
+  print(images_list)
   
-******************************************************************************** 
-  Truy cập darknet/makefile. Mở file makefile và sửa 4 dòng đầu tiên (sửa số 0 thành số 1):
-    (Nếu không sửa online được thì tải về - Edit - Upload lên lại)
-      GPU=1
-      CUDNN=1
-      CUDNN_HALF=1
-      OPENCV=1
-    Kết quả: Xem ảnh Google Colab_Makefile_Edit.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_Makefile_Edit.png)
-
-
-   
-******************************************************************************** 
-Bước 9. Tải pretrain
-  %cd /content/gdrive/My\ Drive/darknet
-  !wget https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.conv.137
+  Kết quả: ['data/obj/2022-08-16-c4-D32-GS1M-25M-0026.jpg', ...
+********************************************************************************  
+Bước 15: Pretrain
   (LƯU Ý: Sau 6 phút Google Colab tự động đăng xuất nên nếu BÁO LỖI không tìm thấy thư mục gdrive/... thì connect lại từ bước 1 -  Import)
-
-Bước 10: Make darknet
-  %cd /content/gdrive/My\ Drive/darknet
-  !make clean
-  !make
+  
   !chmod +x ./darknet
-
-Bước 11: Train model
-   kiểm tra lại các bước xem đầy đủ chưa nhé!
-    1. Tạo file train.txt, val.txt
-    2.Tạo file yolo.names, yolo.data
-    3. Sửa makefile và bật GPU
-    4. Sửa file cfg (tổng cộng sửa 10 dòng nhé)
-    5. Make darknet
-    6.Tải pretrain
-  %cd /content/gdrive/My\ Drive/darknet
-  !./darknet detector train yolo.data cfg/yolov4-custom.cfg yolov4.conv.137 -dont_show -map
+  !./darknet detector train data/obj.data cfg/yolov3_training.cfg darknet53.conv.74 -dont_show
   ******************************************************************************** 
   GIẢI THÍCH:
   “!./darknet detector train” là truy cập vào thư mục darknet và thực hiện lệnh train
-  yolo.data, cfg/yolov4-custom.cfg là các file ta đã tạo và sửa ở trên
-  yolov4.conv.137 là file ta đã tải ở bước 4.11
+  yolo.data, cfg/olov3_training.cfg là các file ta đã tạo và sửa ở trên
+  yolov3_training.cfg darknet53.conv.74 là file ta đã tải ở bước xxx
   -dont_show để tạo ra biểu đồ của loss function phục vụ quá trình giám sát và đánh giá mô hình
   -map tạo ra biểu đồ mAP.
    ******************************************************************************** 
