@@ -4,7 +4,7 @@ YOLOvx: mô hình mạng CNN cho việc phát hiện, nhận dạng, phân loạ
 Trong đóp các convolutional layers sẽ trích xuất ra các feature của ảnh, còn full-connected layers sẽ dự đoán ra xác suất đó và tọa độ của đối tượng.
 
 Google Colab: một dịch vụ miễn phí của Google (GPU, TPU) nhằm hỗ trợ nghiên cứu và học tập về AI. GC cung cấp môi trường Code như Jupyter Notebook.
-
+********************************************************************************
 Bước 1: Đăng nhập google drive và log in.
         Tạo mới folder “yolov3”.
         Nén toàn bộ tập tin ảnh và txt thành data.zip và tải lên Drive, bỏ trong thư mục darknet
@@ -14,18 +14,18 @@ Bước 1: Đăng nhập google drive và log in.
           Thông thường khi gán nhãn không để ý có thể là 15, 16 hoặc số khác.
           CẦN HIỆU CHỈNH TRƯỚC KHI ZIP
         Kết quả: Google Colab_UploadData_ZIP.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_UploadData_ZIP.png)
-
+********************************************************************************
 Bước 2: Truy cập https://colab.research.google.com/
   Sign In: Sử dụng Email của Google
-  
+********************************************************************************  
 Bước 3: File - Upload Notebook - Train_YoloV3.ipynb
   Tập tin trong folder train_yolo_to_detect_custom_object đã được tải ở pysource.com hoặc từ github ở respository này.
   Xem ảnh Google colab_UploadTrainning_notebook.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20colab_UploadTrainning_notebook.png)
-  
+********************************************************************************  
 Bước 4: enable the GPU
   Edit - Notebook Settings - GPU
   Kết quả: Xem ảnh Google Colab_SetGPU.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_SetGPU.png)
-
+********************************************************************************
 Bước 5: Thực hiện "Connect google drive"
   5.1. # Check if NVIDIA GPU is enabled
   !nvidia-smi
@@ -45,13 +45,13 @@ Bước 5: Thực hiện "Connect google drive"
   Xem ảnh Google Colab_ImportDrive_Accept.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_ImportDrive_Accept.png)
   Xác nhận quyền truy cập đến Google Drive.
   Kết quả: Mounted at /content/gdrive
-  
+********************************************************************************  
 Bước 6: Cập nhật các Package: Clik +Code (Có thể code thêm hoặc bỏ qua)
   !apt-get update
   !apt-get upgrade
   Click PLAY again
   Kết quả: Xem ảnh Google Colab_Update.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_Update.png)
-
+********************************************************************************
 Bước 7: Clone the Darknet
   !rm -rf darknet #Xóa thư mục darknet nếu có 
   %cd "/mydrive/yolov3_Sep2022" # truy cập vào thư mục yolov3_Sep2022 trong Drive
@@ -67,7 +67,7 @@ Bước 7: Clone the Darknet
     remote: Total 15490 (delta 10), reused 20 (delta 8), pack-reused 15460
     Receiving objects: 100% (15490/15490), 14.08 MiB | 23.75 MiB/s, done.
     Resolving deltas: 100% (10398/10398), done.
-  
+********************************************************************************  
 Bước 8: Compile Darknet using Nvidia GPU
   # change makefile to have GPU and OPENCV enabled
   %cd darknet
@@ -80,7 +80,7 @@ Bước 8: Compile Darknet using Nvidia GPU
   nvcc -gencode arch=compute_35,code=sm_35 -gencode arch=compute_50,code=[sm_50,compute_50] -gencode arch=compute_52,code=[sm_52,compute_52] -gencode arch=compute_61,code=[sm_61,compute_61] -Iinclude/ -I3rdparty/stb/include -DOPENCV `pkg-config --cflags opencv4 2> /dev/null || pkg-config --cflags opencv` -DGPU -I/usr/local/cuda/include/ -DCUDNN --compiler-options "-Wall -Wfatal-errors -Wno-unused-result -Wno-unknown-pragmas -fPIC -Ofast -DOPENCV -DGPU -DCUDNN -I/usr/local/cudnn/include" -c ./src/avgpool_layer_kernels.cu -o obj/avgpool_layer_kernels.o
   nvcc warning : The 'compute_35', 'compute_37', 'compute_50', 'sm_35', 'sm_37' and 'sm_50' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
   g++ -std=c++11 -std=c++11 -Iinclude/ -I3rdparty/stb/include -DOPENCV `pkg-config --cflags opencv4 2> /dev/null || pkg-config --cflags opencv` -DGPU -I/usr/local/cuda/include/ -DCUDNN -Wall -Wfatal-errors -Wno-unused-result -Wno-unknown-pragmas -fPIC -Ofast -DOPENCV -DGPU -DCUDNN -I/usr/local/cudnn/include obj/image_opencv.o obj/http_stream.o obj/gemm.o obj/utils.o obj/dark_cuda.o obj/convolutional_layer.o obj/list.o obj/image.o obj/activations.o obj/im2col.o obj/col2im.o obj/blas.o obj/crop_layer.o obj/dropout_layer.o obj/maxpool_layer.o obj/softmax_layer.o obj/data.o obj/matrix.o obj/network.o obj/connected_layer.o obj/cost_layer.o obj/parser.o obj/option_list.o obj/darknet.o obj/detection_layer.o obj/captcha.o obj/route_layer.o obj/writing.o obj/box.o obj/nightmare.o obj/normalization_layer.o obj/avgpool_layer.o obj/coco.o obj/dice.o obj/yolo.o obj/detector.o obj/layer.o obj/compare.o obj/classifier.o obj/local_layer.o obj/swag.o obj/shortcut_layer.o obj/representation_layer.o obj/activation_layer.o obj/rnn_layer.o obj/gru_layer.o obj/rnn.o obj/rnn_vid.o obj/crnn_layer.o obj/demo.o obj/tag.o obj/cifar.o obj/go.o obj/batchnorm_layer.o obj/art.o obj/region_layer.o obj/reorg_layer.o obj/reorg_old_layer.o obj/super.o obj/voxel.o obj/tree.o obj/yolo_layer.o obj/gaussian_yolo_layer.o obj/upsample_layer.o obj/lstm_layer.o obj/conv_lstm_layer.o obj/scale_channels_layer.o obj/sam_layer.o obj/convolutional_kernels.o obj/activation_kernels.o obj/im2col_kernels.o obj/col2im_kernels.o obj/blas_kernels.o obj/crop_layer_kernels.o obj/dropout_layer_kernels.o obj/maxpool_layer_kernels.o obj/network_kernels.o obj/avgpool_layer_kernels.o -o darknet -lm -pthread `pkg-config --libs opencv4 2> /dev/null || pkg-config --libs opencv` -L/usr/local/cuda/lib64 -lcuda -lcudart -lcublas -lcurand -L/usr/local/cudnn/lib64 -lcudnn -lstdc++
-
+********************************************************************************
 Bước 9: Configure Darknet network for training YOLO V3
   9.1 Copy file cấu hình
      !cp cfg/yolov3.cfg cfg/yolov3_training.cfg
@@ -97,20 +97,31 @@ Bước 9: Configure Darknet network for training YOLO V3
      !sed -i '783 s@classes=80@classes=1@' cfg/yolov3_training.cfg
      !sed -i '603 s@filters=255@filters=18@' cfg/yolov3_training.cfg
      !sed -i '689 s@filters=255@filters=18@' cfg/yolov3_training.cfg
-     !sed -i '776 s@filters=255@filters=18@' cfg/yolov3_training.cfg
-      
-
-Bước 10: login to folder trên google drive để lưu trữ các file weights
-  %cd "/mydrive/yolov3_Sep2022"
-  (Thư mục yolov3_Sep2022 được tạo ra từ bước 1)
+     !sed -i '776 s@filters=255@filters=18@' cfg/yolov3_training.cfg    
+********************************************************************************
+Bước 10: Tạo file obj.name = classses
+  !echo "hongcau" > data/obj.names
+  !echo -e 'classes= 1\ntrain  = data/train.txt\nvalid  = data/test.txt\nnames = data/obj.names\nbackup = /mydrive/yolov3_Sep2022' > data/obj.data
+  !mkdir data/obj
+********************************************************************************
+Bước 11: # Download weights darknet model 53
+  !wget https://pjreddie.com/media/files/da
+   
+  Kết quả:
+  --2022-09-09 09:46:57--  https://pjreddie.com/media/files/darknet53.conv.74
+  Resolving pjreddie.com (pjreddie.com)... 128.208.4.108
+  Connecting to pjreddie.com (pjreddie.com)|128.208.4.108|:443... connected.
+  HTTP request sent, awaiting response... 200 OK
+  Length: 162482580 (155M) [application/octet-stream]
+  Saving to: ‘darknet53.conv.74’
+  darknet53.conv.74   100%[===================>] 154.96M  42.7MB/s    in 4.0s    
+********************************************************************************
+Bước 12: Extract Images
+  !unzip ../data.zip -d data/obj
   
-  train.txt (chứa địa chỉ của các file ảnh đưa vào quá trình train model) 
-  val.txt (chứa địa chỉ của các file ảnh đưa vào quá trình test và đánh giá model)
-  ********************************************************************************
-  CHÚ Ý KHOẢNG CÁCH CÁC DẤU CÁCH: VÌ ĐÂY LÀ CODE PYTHON
-  ********************************************************************************
-%cd /content/gdrive/My Drive/darknet/
-
+********************************************************************************
+  CHUẨN BỊ TRAINNING
+********************************************************************************
 #import các thư viện
 import glob2
 import math  
