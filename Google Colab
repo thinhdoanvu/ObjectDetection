@@ -174,7 +174,10 @@ Bước 15: Pretrain
   yolov3_training.cfg darknet53.conv.74 là file ta đã tải ở bước xxx
   -dont_show để tạo ra biểu đồ của loss function phục vụ quá trình giám sát và đánh giá mô hình
   -map tạo ra biểu đồ mAP.
-   ******************************************************************************** 
+ ********************************************************************************
+  AUTO REFRESH PAGE
+  auto_refresh_page.sh
+ ******************************************************************************** 
                                 STOP TRAINNING
    ******************************************************************************** 
    Trong quá trình train, output được xuất liên tục. Chúng ta chỉ cần quan tâm tới một số vấn đề :1: 3619.999512, 3619.999512 avg loss​ :
