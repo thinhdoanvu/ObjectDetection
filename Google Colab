@@ -22,37 +22,88 @@ Bước 3: File - Upload Notebook - Train_YoloV3.ipynb
   Tập tin trong folder train_yolo_to_detect_custom_object đã được tải ở pysource.com hoặc từ github ở respository này.
   Xem ảnh Google colab_UploadTrainning_notebook.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20colab_UploadTrainning_notebook.png)
   
-  Liên kết với Google drive 
-    Xem ảnh Google Colab_ImportDrive.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_ImportDrive.png) 
-    Xem ảnh Google Colab_ImportDrive_Accept.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_ImportDrive_Accept.png)
+Bước 4: enable the GPU
+  Edit - Notebook Settings - GPU
+  Kết quả: Xem ảnh Google Colab_SetGPU.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_SetGPU.png)
+
+Bước 5: Thực hiện "Connect google drive"
+  5.1. # Check if NVIDIA GPU is enabled
+  !nvidia-smi
+  
+  Kết quả: 
+  Fri Sep  9 08:57:13 2022       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 460.32.03    Driver Version: 460.32.03    CUDA Version: 11.2     |
+
+  5.2. Liên kết với Google drive
+  from google.colab import drive
+  drive.mount('/content/gdrive')
+  !ln -s /content/gdrive/My\ Drive/ /mydrive
+  !ls /mydrive
+     
+  Xem ảnh Google Colab_ImportDrive.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_ImportDrive.png) 
+  Xem ảnh Google Colab_ImportDrive_Accept.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_ImportDrive_Accept.png)
   Xác nhận quyền truy cập đến Google Drive.
   Kết quả: Mounted at /content/gdrive
   
-Bước 3: Cập nhật các Package: Clik +Code
+Bước 6: Cập nhật các Package: Clik +Code (Có thể code thêm hoặc bỏ qua)
   !apt-get update
   !apt-get upgrade
   Click PLAY again
   Kết quả: Xem ảnh Google Colab_Update.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_Update.png)
 
-Bước 4: Tải model về drive (Chú ý là phải có các ký tự ! và %)
-  Clik +CODE
+Bước 7: Clone the Darknet
   !rm -rf darknet #Xóa thư mục darknet nếu có 
-  %cd /content/gdrive/My\ Drive # truy cập vào Drive
-  !git clone https://github.com/AlexeyAB/darknet #Tải model về Drive
-  !rm -rf data #Xóa thư mục data trong thư mục darknet 
-  !mkdir backup # tạo thư mục backup để lưu các file trọng số sau training
-  Kết quả: 
-    Xem ảnh Google Colab_DownloadModel.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_DownloadModel.png)
-    Xem ảnh Google Colab_darknet.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_darknet.png)
-    Xem ảnh Google Colab_darknet_inside.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_darknet_inside.png)
-  
-Bước 6: Giải nén data.zip
-  %cd /content/gdrive/MyDrive/darknet/
-  !unzip data.zip
-  !mv hongcau data
-  Kết quả: Xem ảnh Google Colab_Unzip_Inside.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_Unzip_Inside.png)
+  %cd "/mydrive/yolov3_Sep2022" # truy cập vào thư mục yolov3_Sep2022 trong Drive
+  !git clone https://github.com/AlexeyAB/darknet #Tải model về Drive 
+  !rm -rf data #Xóa thư mục data trong thư mục darknet
+  !mkdir backup # tạo thư mục backup để lưu các file trọng số sau đào tạo 
 
-Bước 7: Tạo các file cho trainning (tham khảo miai.vn)
+  Kết quả: 
+    Cloning into 'darknet'...
+    remote: Enumerating objects: 15490, done.
+    remote: Counting objects: 100% (30/30), done.
+    remote: Compressing objects: 100% (20/20), done.
+    remote: Total 15490 (delta 10), reused 20 (delta 8), pack-reused 15460
+    Receiving objects: 100% (15490/15490), 14.08 MiB | 23.75 MiB/s, done.
+    Resolving deltas: 100% (10398/10398), done.
+  
+Bước 8: Compile Darknet using Nvidia GPU
+  # change makefile to have GPU and OPENCV enabled
+  %cd darknet
+  !sed -i 's/OPENCV=0/OPENCV=1/' Makefile
+  !sed -i 's/GPU=0/GPU=1/' Makefile
+  !sed -i 's/CUDNN=0/CUDNN=1/' Makefile
+  !make
+  
+  Kết quả:
+  nvcc -gencode arch=compute_35,code=sm_35 -gencode arch=compute_50,code=[sm_50,compute_50] -gencode arch=compute_52,code=[sm_52,compute_52] -gencode arch=compute_61,code=[sm_61,compute_61] -Iinclude/ -I3rdparty/stb/include -DOPENCV `pkg-config --cflags opencv4 2> /dev/null || pkg-config --cflags opencv` -DGPU -I/usr/local/cuda/include/ -DCUDNN --compiler-options "-Wall -Wfatal-errors -Wno-unused-result -Wno-unknown-pragmas -fPIC -Ofast -DOPENCV -DGPU -DCUDNN -I/usr/local/cudnn/include" -c ./src/avgpool_layer_kernels.cu -o obj/avgpool_layer_kernels.o
+  nvcc warning : The 'compute_35', 'compute_37', 'compute_50', 'sm_35', 'sm_37' and 'sm_50' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+  g++ -std=c++11 -std=c++11 -Iinclude/ -I3rdparty/stb/include -DOPENCV `pkg-config --cflags opencv4 2> /dev/null || pkg-config --cflags opencv` -DGPU -I/usr/local/cuda/include/ -DCUDNN -Wall -Wfatal-errors -Wno-unused-result -Wno-unknown-pragmas -fPIC -Ofast -DOPENCV -DGPU -DCUDNN -I/usr/local/cudnn/include obj/image_opencv.o obj/http_stream.o obj/gemm.o obj/utils.o obj/dark_cuda.o obj/convolutional_layer.o obj/list.o obj/image.o obj/activations.o obj/im2col.o obj/col2im.o obj/blas.o obj/crop_layer.o obj/dropout_layer.o obj/maxpool_layer.o obj/softmax_layer.o obj/data.o obj/matrix.o obj/network.o obj/connected_layer.o obj/cost_layer.o obj/parser.o obj/option_list.o obj/darknet.o obj/detection_layer.o obj/captcha.o obj/route_layer.o obj/writing.o obj/box.o obj/nightmare.o obj/normalization_layer.o obj/avgpool_layer.o obj/coco.o obj/dice.o obj/yolo.o obj/detector.o obj/layer.o obj/compare.o obj/classifier.o obj/local_layer.o obj/swag.o obj/shortcut_layer.o obj/representation_layer.o obj/activation_layer.o obj/rnn_layer.o obj/gru_layer.o obj/rnn.o obj/rnn_vid.o obj/crnn_layer.o obj/demo.o obj/tag.o obj/cifar.o obj/go.o obj/batchnorm_layer.o obj/art.o obj/region_layer.o obj/reorg_layer.o obj/reorg_old_layer.o obj/super.o obj/voxel.o obj/tree.o obj/yolo_layer.o obj/gaussian_yolo_layer.o obj/upsample_layer.o obj/lstm_layer.o obj/conv_lstm_layer.o obj/scale_channels_layer.o obj/sam_layer.o obj/convolutional_kernels.o obj/activation_kernels.o obj/im2col_kernels.o obj/col2im_kernels.o obj/blas_kernels.o obj/crop_layer_kernels.o obj/dropout_layer_kernels.o obj/maxpool_layer_kernels.o obj/network_kernels.o obj/avgpool_layer_kernels.o -o darknet -lm -pthread `pkg-config --libs opencv4 2> /dev/null || pkg-config --libs opencv` -L/usr/local/cuda/lib64 -lcuda -lcudart -lcublas -lcurand -L/usr/local/cudnn/lib64 -lcudnn -lstdc++
+
+Bước 9: Configure Darknet network for training YOLO V3
+  9.1 Copy file cấu hình
+     !cp cfg/yolov3.cfg cfg/yolov3_training.cfg
+     
+  9.2. Thiết lập cấu hình: classes trong mục [yolo] = số nhãn(classes của bạn), sửa filters = (số nhãn +5)*3 trong mục [Convolution] nằm trước mục [yolo]. 
+      Model của mình sẽ sửa thành classes = 1 
+      Model của mình có số nhãn là 1 thì để filters =18, số nhãn bằng 2 thì để filters = 21
+      
+     !sed -i 's/batch=1/batch=64/' cfg/yolov3_training.cfg
+     !sed -i 's/subdivisions=1/subdivisions=16/' cfg/yolov3_training.cfg
+     !sed -i 's/max_batches = 500200/max_batches = 4000/' cfg/yolov3_training.cfg
+     !sed -i '610 s@classes=80@classes=1@' cfg/yolov3_training.cfg
+     !sed -i '696 s@classes=80@classes=1@' cfg/yolov3_training.cfg
+     !sed -i '783 s@classes=80@classes=1@' cfg/yolov3_training.cfg
+     !sed -i '603 s@filters=255@filters=18@' cfg/yolov3_training.cfg
+     !sed -i '689 s@filters=255@filters=18@' cfg/yolov3_training.cfg
+     !sed -i '776 s@filters=255@filters=18@' cfg/yolov3_training.cfg
+      
+
+Bước 10: login to folder trên google drive để lưu trữ các file weights
+  %cd "/mydrive/yolov3_Sep2022"
+  (Thư mục yolov3_Sep2022 được tạo ra từ bước 1)
+  
   train.txt (chứa địa chỉ của các file ảnh đưa vào quá trình train model) 
   val.txt (chứa địa chỉ của các file ảnh đưa vào quá trình test và đánh giá model)
   ********************************************************************************
@@ -108,10 +159,6 @@ Bước 7: Tạo các file cấu hình cho model
     names = yolo.names
     backup = backup
   Kết quả: Xem ảnh Google Colab_names_data_inside.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%Colab_names_data_inside.png)
-
-Bước 8: Bật GPU và cấu hình GPU
-  Click Run time - Change run time type - Click GPU
-  Kết quả: Xem ảnh Google Colab_SetGPU.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_SetGPU.png)
   
 ******************************************************************************** 
   Truy cập darknet/makefile. Mở file makefile và sửa 4 dòng đầu tiên (sửa số 0 thành số 1):
@@ -122,17 +169,7 @@ Bước 8: Bật GPU và cấu hình GPU
       OPENCV=1
     Kết quả: Xem ảnh Google Colab_Makefile_Edit.png (https://github.com/thinhdoanvu/ObjectDetection/blob/main/Google%20Colab_Makefile_Edit.png)
 
-******************************************************************************** 
-  Cấu hình cho model YOLOv4. Truy câp darknet/cfg - Mở yolo4-custom.cfg và chỉnh sửa các dòng: (tải về Edit - Sau đó Upload)
-    Dòng 3: Batch = 64
-    Dòng 4: subdivisions=16
-    Dòng 20: max_batches = số nhãn*2000 ( ví dụ mình có 3 nhãn, thì sẽ sửa thành 6000. Hoặc có thể lớn hơn, tùy ý thích)
-    Dòng 22: step = 80%(của max_batches), 90% (của max_batches). ví dụ max_batches của mình là 6000, step sẽ sửa thành: step = 4800,5400
-    
-    Sửa classes trong mục [yolo] = số nhãn(classes của bạn), sửa filters = (số nhãn +5)*3 trong mục [Convolution] nằm trước mục [yolo]. 
-      Model của mình sẽ sửa thành classes = 1 
-      Model của mình có số nhãn là 1 thì để filters =18, số nhãn bằng 2 thì để filters = 21
-      UPLOAD file cfg trở lại darknet
+
    
 ******************************************************************************** 
 Bước 9. Tải pretrain
